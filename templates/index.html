@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Home - Work Hours Tracker{% endblock %}
+{% block content %}
+  <div class="grid">
+    <div class="card">
+      <h2>Quick Swipe</h2>
+      <p class="muted">Enter card ID or username and tap IN/OUT.</p>
+      <form class="row" method="post" action="/swipe/">
+        {% csrf_token %}
+        <input name="card_no" type="text" placeholder="Card / User" value="USER1">
+        <button class="action" name="action" value="IN">IN</button>
+        <button class="action" name="action" value="OUT">OUT</button>
+        <button class="secondary" formaction="/track/" formmethod="get">TRACK</button>
+      </form>
+      <p class="muted" style="margin-top:12px">After pressing IN/OUT you will be redirected to the Track page which summarises hours.</p>
+    </div>
+
+    <aside class="card">
+      <h3>Tips</h3>
+      <ul>
+        <li>Use a short card ID like <code>USER1</code>.</li>
+        <li>Track shows per-day and per-month summaries.</li>
+        <li>Quick keyboard: focus is set on the input for faster swipes.</li>
+      </ul>
+    </aside>
+  </div>
+{% endblock %}

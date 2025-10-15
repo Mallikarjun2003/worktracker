@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{% block title %}Work Hours Tracker{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <script defer src="{% static 'js/main.js' %}"></script>
+  {% block head %}{% endblock %}
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <img src="{% static 'images/logo.svg' %}" alt="Logo" class="logo">
+        <div class="brand-text">
+          <h1>Work Hours Tracker</h1>
+          <p class="muted">Simple, fast attendance & hours summary</p>
+        </div>
+      </div>
+      <nav class="nav-right">
+        <a href="/" class="btn btn-ghost">Home</a>
+        <a href="/track/" class="btn">Track</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span>© {{ now|date:'Y' }} Work Hours Tracker</span>
+      <span class="muted">Built for quick team usage</span>
+    </div>
+  </footer>
+</body>
+</html>

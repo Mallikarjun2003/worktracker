@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block title %}Track - {{ card_no }}{% endblock %}
+{% block content %}
+  <div style="display:flex;gap:20px;flex-direction:column">
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <h2>Stats for {{ card_no }}</h2>
+        <a href="/" class="btn-ghost">Back</a>
+      </div>
+      <h3 class="muted">Per Day</h3>
+      <div style="overflow:auto">
+        <table>
+          <thead>
+            <tr><th>Date</th><th>Worked</th><th>Debt</th><th>Pairs</th></tr>
+          </thead>
+          <tbody>
+          {% for d in stats.per_day %}
+            <tr>
+              <td>{{ d.date }}</td>
+              <td>{{ d.worked_human }}</td>
+              <td>{{ d.debt_human }}</td>
+              <td>
+                <ul class="muted">
+                  {% if d.pairs_human %}
+                    {% for s in d.pairs_human %}
+                      <li>{{ s }}</li>
+                    {% endfor %}
+                  {% else %}
+                    {% for p in d.pairs %}
+                      <li>{{ p.0 }} → {{ p.1 }} ({{ p.2 }} mins)</li>
+                    {% endfor %}
+                  {% endif %}
+                </ul>
+              </td>
+            </tr>
+          {% empty %}
+            <tr><td colspan="4">No records</td></tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 class="muted">Per Month</h3>
+      <table>
+        <thead><tr><th>Month</th><th>Total Worked</th></tr></thead>
+        <tbody>
+        {% for m in stats.months %}
+          <tr><td>{{ m.month }}</td><td>{{ m.human }}</td></tr>
+        {% empty %}
+          <tr><td colspan="2">No monthly records</td></tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+{% endblock %}
