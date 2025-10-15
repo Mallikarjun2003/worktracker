@@ -6,13 +6,8 @@ from .utils import compute_stats_for_card
 from django.db import DatabaseError
 from django.http import HttpResponse
 
-
-
-
 def index(request):
     return render(request, 'index.html', {})
-
-
 def swipe(request):
     if request.method == 'POST':
         card_no = request.POST.get('card_no', 'USER1').strip() or 'USER1'
